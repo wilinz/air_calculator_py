@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Android TFLite (LiteRT) 导出：prefix_enc.tflite + decoder.tflite，当前 Android
-部署版（187 MB，encoder GPU partial offload + decoder XNNPACK fp32）。
+部署版（187 MB，encoder 与 decoder 都走 GPU，整图下沉）。
 
 图结构按 Adreno OpenCL GpuDelegateV2 算子兼容性逐项改写（模型权重不变）：
   · CAST INT32→INT64           → 内部全程 int32；F.embedding 用 onehot @ W
@@ -979,8 +979,10 @@ def main():
     converter.signature(
         'decode', step_mod, sample_args=(token_ex, pos_ex) + past_kv_ex,
     )
-    # decoder 整体落 XNNPACK（GPU partial offload < 10% 算子，跨边界 sync 反而慢
-    # 且数值漂移），重新打开 lightweight_conversion 以折叠常量、压缩文件体积。
+    # 下面这些算子改写做完之后，decoder 两个签名都能整图下沉到 GPU
+    # （prefill 455/455、decode 484/484，各 1 个分区）；改之前只有不到一成算子
+    # 接得住，跨边界 sync 反而更慢。重新打开 lightweight_conversion 以折叠常量、
+    # 压缩文件体积。
     decoder_edge = converter.convert(
         lightweight_conversion=True,
         strict_export='auto',
