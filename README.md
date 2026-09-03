@@ -3,8 +3,15 @@
 空中手写计算器的 Python 端：仅轨迹（stroke-only）模型的训练、端侧导出、合成数据
 生成与评测。
 
-> 客户端见 [air_calculator](https://github.com/wilinz/air_calculator)，Rust 核心见 [air_calculator-rs](https://github.com/wilinz/air_calculator-rs)、
-> [edge-infer](https://github.com/wilinz/edge-infer)、[hand-track](https://github.com/wilinz/hand-track)。
+本项目分为五个仓库，需要**并排 checkout**——Rust 侧是 path 依赖。
+
+| 仓库 | 职责 |
+|---|---|
+| [air_calculator](https://github.com/wilinz/air_calculator) | Flutter 客户端：UI、相机接入、手势交互与三端集成 |
+| [air_calculator-rs](https://github.com/wilinz/air_calculator-rs) | Rust 核心：识别解码循环、LaTeX 求值与 C ABI |
+| [hand-track](https://github.com/wilinz/hand-track) | 手部检测：palm + landmark 两段式流水线与两端权重 |
+| [edge-infer](https://github.com/wilinz/edge-infer) | 推理抽象：`Engine` trait + LiteRT / Core ML 后端 |
+| **air_calculator_py** ← 本仓 | 模型训练、合成数据生成与端侧导出 |
 
 ## 目录结构
 
@@ -114,14 +121,7 @@ streamlit run vis_errors.py --server.port 8501
 
 数据与权重不在仓库里，路径按上表相对本仓摆放。
 
-## 关联仓库
-
-| 仓 | 内容 |
-|---|---|
-| [air_calculator](https://github.com/wilinz/air_calculator) | Flutter 客户端 |
-| [air_calculator-rs](https://github.com/wilinz/air_calculator-rs) | 手写识别核心与 C ABI |
-| [hand-track](https://github.com/wilinz/hand-track) | 手部检测流水线与权重 |
-| [edge-infer](https://github.com/wilinz/edge-infer) | 推理抽象与 LiteRT / Core ML 后端 |
+## 产物去向
 
 端侧导出的产物由 [air_calculator](https://github.com/wilinz/air_calculator) 的 `tool/copy_platform_models.sh` 就位，
 `export_coreml_ios.py` 的 `--max-decode` 要与 Rust 侧的 `MAX_DECODE` 一致。
