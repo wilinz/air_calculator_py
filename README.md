@@ -14,6 +14,9 @@
 | **air_calculator_py** ← 本仓 | 模型训练、合成数据生成与端侧导出 |
 | [air_calculator-models](https://github.com/wilinz/air_calculator-models) | 部署版识别模型权重：checkpoint + 两端导出产物 |
 
+另有 [mathwriting-synth](https://github.com/wilinz/mathwriting-synth)——本仓 `synth/` 那套
+合成流程的独立版本，单独发布、单独许可（MIT），不参与并排 checkout。
+
 ## 目录结构
 
 ```
@@ -87,6 +90,17 @@ python3 export_tf_android_fp32.py \
 
 ## synth/ —— 合成数据 pipeline
 
+> 这套合成流程另有一个独立仓：**[mathwriting-synth](https://github.com/wilinz/mathwriting-synth)**。
+> MathWriting 2024 论文描述了「把真实手写笔画填进 LuaLaTeX 抽出的 token bbox」这个
+> 合成方案，但 Google 没有放出代码——那个仓是照着论文独立实现的，并扩出了按错误类型
+> 定向生成的能力。想单独用这套合成、不关心本仓训练代码的，直接去那边：它带 README、
+> 预抽好的 `symbol_library.pkl`（229 token）、字库浏览与剔除坏样本的可视化工具，以及
+> 从原始数据集重建字库的 `build_symbol_library.py`——这些本仓都没有。
+>
+> 本目录是同一套 pipeline 在训练流程里的在用副本（`synth_from_bboxes.py` 两边基本逐行
+> 相同），额外多了 OpenAI / Qwen 两个 LLM backend 和 `extract_labels.py`。两边许可不同：
+> 那个仓是 MIT，本仓是 Apache 2.0——同一份代码你按哪边的条款用都行。
+
 `latex_to_inkml.py` 是一体化入口，三步可拆开：
 
 1. `generate_latex*.py` —— LLM 批量生成 LaTeX 公式（Claude / OpenAI / Qwen 三个 backend）
@@ -94,6 +108,10 @@ python3 export_tf_android_fp32.py \
 3. `synth_from_bboxes.py` —— bbox + `assets/symbol_library.pkl` 字库 → 真实手写笔画 InkML
 
 `extract_labels.py` —— 从已有 InkML 提取 normalizedLabel 作为 LLM 生成的 seed。
+
+训练里合成数据只用在第一阶段（V2）：229K 人工 + 396K 合成从零训练，之后 V3 / V4 就
+切回纯人工数据加两批定向难例了。逐阶段配方见
+[air_calculator-models](https://github.com/wilinz/air_calculator-models)。
 
 ## scripts/ —— 杂项工具
 
