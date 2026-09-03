@@ -1,0 +1,7 @@
+# Streamlit / 可视化缓存
+.streamlit/
+cache/
+
+# 导出的图片
+*.png
+*.jpg

@@ -1,0 +1,4 @@
+# 数据清洗中间产物
+*_cleaned.parquet
+*_cleaned.jsonl
+out/

@@ -1,0 +1,8 @@
+# Python 缓存
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# 临时 / 实验输出
+/tmp/
+*.tmp

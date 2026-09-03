@@ -1,0 +1,10 @@
+# 合成产物：parquet / jsonl / 生成的 latex 文本
+*.parquet
+*.jsonl
+
+# 输出目录
+generated_latex/
+synthetic_*/
+out/
+
+# 注：assets/symbol_library.pkl 是合成数据生成必需的字库（3.6 MB），保留追踪

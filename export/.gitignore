@@ -1,0 +1,11 @@
+# 导出产物
+*.pte
+*.tflite
+*.mlmodel
+*.mlmodelc/
+*.onnx
+
+# 导出输出目录（默认命名）
+export_v3*/
+export_*_ios/
+export_*_android/

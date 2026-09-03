@@ -1,0 +1,16 @@
+# 训练输出
+decoder_only*/
+output/
+runs/
+logs/
+wandb/
+
+# checkpoint
+*.pt
+*.pth
+*.ckpt
+latest.pt.tmp
+
+# best/last 子目录里的 ckpt 文件
+best_*/
+last_*/
