@@ -125,3 +125,17 @@ streamlit run vis_errors.py --server.port 8501
 
 端侧导出的产物由 `../air_calculator/tool/copy_platform_models.sh` 就位，
 `export_coreml_ios.py` 的 `--max-decode` 要与 Rust 侧的 `MAX_DECODE` 一致。
+
+## License
+
+Apache License 2.0 — see `LICENSE` and `NOTICE`.
+
+The code is free to use, modify, redistribute and commercialize, including
+publishing derivative applications on the App Store, Google Play or anywhere
+else. Per section 6 of the Apache License 2.0, no trademark or product name
+rights are granted: **Air Calculator**, **AirCalculator**, `air_calculator` as
+a product name, and the application icons and logos in this repository are
+reserved, and may not be used to publish or promote a derivative work without
+prior written permission. Fork it, but ship it under your own name. Factual
+references such as "based on Air Calculator" are fine, as long as they do not
+suggest endorsement.
