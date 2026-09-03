@@ -244,7 +244,7 @@ def main():
         print(f'[Resume] epoch={start_epoch}  step={resume_step}  best_acc={best_acc:.4f}'
               + ('  [optimizer reset]' if args.reset_optimizer else ''))
 
-    scaler = torch.cuda.amp.GradScaler(enabled=(DEVICE == 'cuda'))
+    scaler = torch.amp.GradScaler('cuda', enabled=(DEVICE == 'cuda'))
 
     # ── 训练循环 ─────────────────────────────────────────────────── #
     global_step = resume_step
@@ -266,7 +266,7 @@ def main():
             stroke_mask = stroke_mask.to(DEVICE)
             imgs = imgs.to(DEVICE)
 
-            with torch.cuda.amp.autocast(enabled=(DEVICE == 'cuda'), dtype=torch.bfloat16):
+            with torch.amp.autocast('cuda', enabled=(DEVICE == 'cuda'), dtype=torch.bfloat16):
                 # 1. 视觉前缀
                 prefix = prefix_enc(imgs, stroke, stroke_mask)  # (B, n_prefix, d_model)
                 B = prefix.size(0)

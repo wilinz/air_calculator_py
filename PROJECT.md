@@ -203,7 +203,7 @@ python3 export/export_tf_android_fp32.py \
 |---|---|
 | `torch` / `torchvision` / `timm` | 训练框架与 DeiT 预训练权重 |
 | `executorch` | iOS 部署导出（CoreML backend） |
-| `tensorflow` / `ai-edge-torch` | Android 部署导出（LiteRT/TFLite） |
+| `litert-torch` / `ai-edge-litert` / `ai-edge-quantizer` | Android 部署导出（LiteRT/TFLite）与转换期量化 |
 | `pyarrow` / `pandas` | parquet 数据集 IO |
 | `anthropic` / `openai` / `dashscope` | LLM 合成数据生成 |
 | `streamlit` | 错误可视化 App |
