@@ -3,8 +3,8 @@
 空中手写计算器的 Python 端：仅轨迹（stroke-only）模型的训练、端侧导出、合成数据
 生成与评测。
 
-> 客户端见 `../air_calculator`，Rust 核心见 `../air_calculator-rs`、
-> `../edge-infer`、`../hand-track`。
+> 客户端见 [air_calculator](https://github.com/wilinz/air_calculator)，Rust 核心见 [air_calculator-rs](https://github.com/wilinz/air_calculator-rs)、
+> [edge-infer](https://github.com/wilinz/edge-infer)、[hand-track](https://github.com/wilinz/hand-track)。
 
 ## 目录结构
 
@@ -118,12 +118,12 @@ streamlit run vis_errors.py --server.port 8501
 
 | 仓 | 内容 |
 |---|---|
-| `../air_calculator` | Flutter 客户端 |
-| `../air_calculator-rs` | 手写识别核心与 C ABI |
-| `../hand-track` | 手部检测流水线与权重 |
-| `../edge-infer` | 推理抽象与 LiteRT / Core ML 后端 |
+| [air_calculator](https://github.com/wilinz/air_calculator) | Flutter 客户端 |
+| [air_calculator-rs](https://github.com/wilinz/air_calculator-rs) | 手写识别核心与 C ABI |
+| [hand-track](https://github.com/wilinz/hand-track) | 手部检测流水线与权重 |
+| [edge-infer](https://github.com/wilinz/edge-infer) | 推理抽象与 LiteRT / Core ML 后端 |
 
-端侧导出的产物由 `../air_calculator/tool/copy_platform_models.sh` 就位，
+端侧导出的产物由 [air_calculator](https://github.com/wilinz/air_calculator) 的 `tool/copy_platform_models.sh` 就位，
 `export_coreml_ios.py` 的 `--max-decode` 要与 Rust 侧的 `MAX_DECODE` 一致。
 
 ## License
