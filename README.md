@@ -3,7 +3,7 @@
 空中手写计算器的 Python 端：仅轨迹（stroke-only）模型的训练、端侧导出、合成数据
 生成与评测。
 
-本项目分为五个仓库，需要**并排 checkout**——Rust 侧是 path 依赖。
+本项目分为六个仓库，需要**并排 checkout**——Rust 侧是 path 依赖。
 
 | 仓库 | 职责 |
 |---|---|
@@ -12,6 +12,7 @@
 | [hand-track](https://github.com/wilinz/hand-track) | 手部检测：palm + landmark 两段式流水线与两端权重 |
 | [edge-infer](https://github.com/wilinz/edge-infer) | 推理抽象：`Engine` trait + LiteRT / Core ML 后端 |
 | **air_calculator_py** ← 本仓 | 模型训练、合成数据生成与端侧导出 |
+| [air_calculator-models](https://github.com/wilinz/air_calculator-models) | 部署版识别模型权重：checkpoint + 两端导出产物 |
 
 ## 目录结构
 
